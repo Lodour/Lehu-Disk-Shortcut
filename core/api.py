@@ -2,7 +2,6 @@
 import requests
 from lxml import etree
 from urlparse import urljoin
-import os
 
 import utils
 
@@ -28,8 +27,7 @@ class LehuBase(requests.Session):
         """
         input_elements = tree.xpath(r'//input')
         post_kw = lambda x: (x.get('id'), x.get('value'))
-        post_data = map(post_kw, input_elements)
-        post_data = dict(post_data)
+        post_data = dict(map(post_kw, input_elements))
         post_data.update(data)
         return self.post(url, post_data)
 
@@ -73,7 +71,4 @@ class LehuPicker(LehuBase):
             force: set False to ignore existed files, default False
         """
         response = self.get(url, stream=True)
-        try:
-            utils.download_file(response, path, file_name, force)
-        except KeyboardInterrupt:
-            print
+        utils.download_file(response, path, file_name, force)

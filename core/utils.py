@@ -1,7 +1,6 @@
 # coding=utf-8
 import os
 import sys
-import requests.packages.urllib3
 import json
 from colorama import init, Fore, Style
 init(autoreset=True)
@@ -34,12 +33,12 @@ def download_file(response, path, file_name, force=False):
     try:
         with open(save_path, 'wb') as f:
             prefix = Fore.GREEN + 'Download: %s' % file_name
-            progress = 0.0
-            for chunk in response.iter_content(chunk_size=1 << 15):
-                progress += 100. * len(chunk) / file_length
+            progress, chunk_size = 0.0, 1 << 15
+            for chunk in response.iter_content(chunk_size=chunk_size):
                 if chunk:
                     f.write(chunk)
                     f.flush()
+                progress += 100. * len(chunk) / file_length
                 info = '\r%s %s [%3.1f%%]' % (prefix, size_info, progress)
                 sys.stdout.write(info)
                 sys.stdout.flush()

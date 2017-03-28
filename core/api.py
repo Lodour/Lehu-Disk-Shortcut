@@ -2,11 +2,12 @@
 import requests
 from lxml import etree
 from urlparse import urljoin
+import os
 
 import utils
 
 class LehuBase(requests.Session):
-    """ Basic class for disk.lehu.shu.edu.cn """
+    """ b """
 
     def __init__(self, index_url=None):
         super(LehuBase, self).__init__()
@@ -63,15 +64,16 @@ class LehuPicker(LehuBase):
         file_info = lambda x: (urljoin(self.index_url, x.get('href')), x.text)
         return map(file_info, tree.cssselect('div.picklist a'))
 
-    def download_file(self, url, path, file_name):
+    def download_file(self, url, path, file_name, force=False):
         """ Download a file from url and save to path
         Args:
             url: where to download
             path: whereto save the file, create if not exists
             file_name: name of file
+            force: set False to ignore existed files, default False
         """
         response = self.get(url, stream=True)
-        utils.download_file(response, path, file_name)
-
-
-
+        try:
+            utils.download_file(response, path, file_name, force)
+        except KeyboardInterrupt:
+            print

@@ -59,13 +59,13 @@ def download_file(response, path, file_name, force=False):
         print
 
 
-def load_data(file_path=None):
+def load_data(file_name=None):
     """ Load data from file
     Args:
-        file_path: data file
+        file_name: data file
     """
     # Prepare file path
-    file_path = file_path or 'data.json'
+    file_name = file_name or 'data.json'
 
     # Load data
     with open('data.json', 'r') as f:

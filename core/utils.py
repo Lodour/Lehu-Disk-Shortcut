@@ -44,7 +44,7 @@ def download_file(response, path, file_name, force=False):
                 sys.stdout.flush()
     except KeyboardInterrupt:
         # Press Ctrl + C to cancel job
-        prefix = Style.DIM + Fore.YELLOW + 'Canceled: %s' % file_name
+        prefix = Fore.YELLOW + 'Canceled: %s' % file_name
         info = '\r%s %s [%3.1f%%]' % (prefix, size_info, progress)
         os.remove(save_path)
     except Exception as e:

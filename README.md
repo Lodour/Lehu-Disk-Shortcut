@@ -30,3 +30,6 @@ $ python lehu.py --help
 - [ ] Upload file
 - [x] Friendly commands
 - [x] Template for `data.json`
+
+## Demo
+![demo](https://github.com/Lodour/Lehu-Disk-Shortcut/raw/master/demo.jpeg)

@@ -1,7 +1,12 @@
 [
     {
-        "caption": "Your Custom Title",
-        "code": "Your Pick Code",
+        "caption": "Your Custom Title 1",
+        "code": "Your Pick Code 1",
         "dir": "Your Path to save files under this pick code"
     },
+    {
+        "caption": "Your Custom Title 2",
+        "code": "Your Pick Code 2",
+        "dir": "Your Path to save files under this pick code"
+    }
 ]

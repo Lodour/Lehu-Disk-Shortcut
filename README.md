@@ -15,6 +15,9 @@ $ python lehu.py --help
 ```
 
 ## Usage
+* Do everything in default (from `data.json`).
+`python lehu.py`
+
 * Load data from specificied file.
 `python lehu.py --data <filename>`
 

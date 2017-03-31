@@ -3,16 +3,17 @@ import os
 import sys
 import json
 from colorama import init, Fore, Style
+
 init(autoreset=True)
 
 
 def download_file(response, path, file_name, force=False):
     """ Download a file and save to path/filename
-    Args:
-        response: requests.response with stream = True
-        path: whereto save the file, create if not exists
-        file_name: name of file
-        force: set False to ignore existed files
+    :param response: requests.response with stream = True
+    :param path: where to save the file, create if not exists
+    :param file_name: name of file
+    :param force: set False to ignore existed files
+    :return: None
     """
     # Create folder if not exists
     if not os.path.exists(path):
@@ -30,10 +31,10 @@ def download_file(response, path, file_name, force=False):
         return
 
     # Download file
+    progress, chunk_size, info = 0.0, 1 << 15, 'Unhandled exception.'
     try:
         with open(save_path, 'wb') as f:
             prefix = Fore.GREEN + 'Download: %s' % file_name
-            progress, chunk_size = 0.0, 1 << 15
             for chunk in response.iter_content(chunk_size=chunk_size):
                 if chunk:
                     f.write(chunk)
@@ -48,12 +49,12 @@ def download_file(response, path, file_name, force=False):
         info = '\r%s %s [%3.1f%%]' % (prefix, size_info, progress)
         os.remove(save_path)
     except Exception as e:
-        # An error occured
+        # An error occurred
         prefix = Fore.RED + 'Warning : %s' % file_name
         info = '\r%s %s [%3.1f%%]\n\t  %s' % (prefix, size_info, progress, e)
         os.remove(save_path)
     finally:
-        # Okay when nothing was catched
+        # Okay when nothing was caught
         sys.stdout.write(info)
         sys.stdout.flush()
         print
@@ -61,8 +62,8 @@ def download_file(response, path, file_name, force=False):
 
 def load_data(file_name=None):
     """ Load data from file
-    Args:
-        file_name: data file
+    :param file_name: name of data file
+    :return: data to download
     """
     # Prepare file path
     file_name = file_name or 'data.json'
@@ -74,5 +75,8 @@ def load_data(file_name=None):
 
 
 def print_head(txt):
-    """ Print Head Info """
+    """ Print Head Info 
+    :param txt: head text
+    :rtype: None
+    """
     print Fore.CYAN + '>>> %s' % txt

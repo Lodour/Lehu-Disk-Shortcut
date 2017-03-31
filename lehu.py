@@ -17,7 +17,7 @@ def do_download(data, f):
     picker = LehuPicker()
     for item in data:
         print_head(item['caption'])
-        file_list = picker.get_filelist(item['code'])
+        file_list = picker.get_fileList(item['code'])
         for file in file_list:
             picker.download_file(file[0], item['dir'], file[1], f)
 

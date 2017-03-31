@@ -69,7 +69,7 @@ def load_data(file_name=None):
     file_name = file_name or 'data.json'
 
     # Load data
-    with open('data.json', 'r') as f:
+    with open(file_name, 'r') as f:
         data = json.load(f)
     return filter(lambda x: x.get('caption'), data)
 

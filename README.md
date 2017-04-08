@@ -56,6 +56,7 @@ $ vim data.json
 - [x] Friendly commands
 - [x] Template for `data.json`
 - [ ] Display progress of upload action
+- [ ] Differ files with a same name by size of file.
 
 
 ## Demo

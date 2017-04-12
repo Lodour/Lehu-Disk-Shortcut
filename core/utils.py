@@ -74,9 +74,9 @@ def load_data(file_name=None):
     return filter(lambda x: x.get('caption'), data)
 
 
-def print_head(txt):
+def print_head(item):
     """ Print Head Info 
-    :param txt: head text
+    :param item: item to pull
     :rtype: None
     """
-    print Fore.CYAN + '>>> %s' % txt
+    print Fore.CYAN + '>>> %s' % item['caption'] + Style.DIM + Fore.CYAN + ' %s' % item['dir']

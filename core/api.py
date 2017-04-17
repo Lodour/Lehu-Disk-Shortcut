@@ -18,7 +18,6 @@ class LehuBase(requests.Session):
 
         # Set url of index page and parse it to an element tree
         self.index_url = index_url or 'http://disk.lehu.shu.edu.cn/'
-        self.index_tree = etree.HTML(self.get(self.index_url).text)
 
     def post_form(self, tree, url, data, post_kw=None, parse=True, **kwargs):
         """ Post data to url with `input` fields in tree

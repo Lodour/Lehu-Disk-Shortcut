@@ -24,17 +24,22 @@ def download_file(response, path, file_name, force=False):
     size_info = '[%d KB]' % (file_length >> 10)
 
     # Check if file is already exists
+    # And with same size
     save_path = os.path.join(path, file_name)
+    down_flag = 'Download'
     if not force and os.path.exists(save_path):
-        info = 'Existed : %s %s' % (file_name, size_info)
-        print Style.DIM + Fore.GREEN + info
-        return
+        file_length_old = os.path.getsize(save_path)
+        if file_length == file_length_old:
+            info = 'Existed : %s %s' % (file_name, size_info)
+            print Style.DIM + Fore.GREEN + info
+            return
+        down_flag = 'Update  '
 
     # Download file
     progress, chunk_size, info = 0.0, 1 << 15, 'Unhandled exception.'
     try:
         with open(save_path, 'wb') as f:
-            prefix = Fore.GREEN + 'Download: %s' % file_name
+            prefix = Fore.GREEN + '%s: %s' % (down_flag, file_name)
             for chunk in response.iter_content(chunk_size=chunk_size):
                 if chunk:
                     f.write(chunk)

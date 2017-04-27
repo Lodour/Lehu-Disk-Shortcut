@@ -21,9 +21,12 @@ def pull(data, f):
     picker = LehuPicker()
     for item in data:
         print_head(item)
-        file_list = picker.get_filelist(item['code'])
-        for file in file_list:
-            picker.download_file(file[0], item['dir'], file[1], f)
+        try:
+            file_list = picker.get_filelist(item['code'])
+            for file in file_list:
+                picker.download_file(file[0], item['dir'], file[1], f)
+        except KeyboardInterrupt:
+            print
 
 
 @click.group()

@@ -26,14 +26,14 @@ def download_file(response, path, file_name, force=False):
     # Check if file is already exists
     # And with same size
     save_path = os.path.join(path, file_name)
-    down_flag = 'Download'
+    down_flag = u'下载'
     if not force and os.path.exists(save_path):
         file_length_old = os.path.getsize(save_path)
         if file_length == file_length_old:
-            info = 'Existed : %s %s' % (file_name, size_info)
+            info = u'存在: %s %s' % (file_name, size_info)
             print Style.DIM + Fore.GREEN + info
             return
-        down_flag = 'Update  '
+        down_flag = u'更新'
 
     # Download file
     progress, chunk_size, info = 0.0, 1 << 15, 'Unhandled exception.'
@@ -50,12 +50,12 @@ def download_file(response, path, file_name, force=False):
                 sys.stdout.flush()
     except KeyboardInterrupt:
         # Press Ctrl + C to cancel job
-        prefix = Fore.YELLOW + 'Canceled: %s' % file_name
+        prefix = Fore.YELLOW + '取消: %s' % file_name
         info = '\r%s %s [%3.1f%%]' % (prefix, size_info, progress)
         os.remove(save_path)
     except Exception as e:
         # An error occurred
-        prefix = Fore.RED + 'Warning : %s' % file_name
+        prefix = Fore.RED + '警告: %s' % file_name
         info = '\r%s %s [%3.1f%%]\n\t  %s' % (prefix, size_info, progress, e)
         os.remove(save_path)
     finally:
